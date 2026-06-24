@@ -151,6 +151,10 @@ def freeze(obj):
     elif isinstance(obj, list):
         # Transform lists into tuples
         return tuple(freeze(el) for el in obj)
+    elif isinstance(obj, tuple):
+        # Freeze tuple elements too, so a nested dict/list inside an
+        # already-tuple arg (e.g. Query.test's *args) is still hashable
+        return tuple(freeze(el) for el in obj)
     elif isinstance(obj, set):
         # Transform sets into ``frozenset``s
         return frozenset(obj)

@@ -236,6 +236,12 @@ class Table:
         """
         Search for all documents matching a 'where' cond.
 
+        Note: a repeated search with the same ``cond`` is served from an
+        internal cache. The returned list is a fresh copy, but its
+        documents are the same objects held by the cache -- treat them as
+        read-only, since mutating one (a key or a nested value) corrupts
+        what a later identical search returns.
+
         :param cond: the condition to check against
         :returns: list of matching documents
         """

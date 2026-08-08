@@ -564,6 +564,12 @@ to the ``table(...)`` function:
 .. hint:: You can set ``cache_size`` to ``None`` to make the cache unlimited in
    size. Also, you can set ``cache_size`` to 0 to disable it.
 
+.. hint:: A repeated search with the same query is served from the cache.
+   The returned list is a fresh copy, but the documents inside it are the
+   same objects the cache holds — treat them as read-only. Mutating a
+   returned document (a key or a nested value) corrupts what a later
+   identical search returns.
+
 .. hint:: It's not possible to open the same table multiple times with different
    settings. After the first invocation, all the subsequent calls will return
    the same table with the same settings as the first one.
